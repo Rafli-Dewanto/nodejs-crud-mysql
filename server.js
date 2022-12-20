@@ -16,13 +16,11 @@ const db = mysql.createConnection({
 })
 
 db.connect((err) => {
-    if (err) throw err
-    console.log(`Connected`)
-
+    if (err) throw err;
     app.get("/", (req, res) => {
         const selectQuery = "SELECT * FROM mahasiswa";
         db.query(selectQuery, (err, result) => {
-            const users = JSON.parse(JSON.stringify(result))
+            const users = result
             res.render("index", { users: users, title: "Daftar Mahasiswa" })
         });
     });
@@ -54,5 +52,5 @@ db.connect((err) => {
 });
 
 app.listen(8000, () => {
-    console.log(`server ready`);
+    console.log(`server running on http://localhost:8000`);
 })
